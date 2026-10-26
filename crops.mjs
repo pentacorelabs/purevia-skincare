@@ -1,0 +1,17 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 0.65 });
+await page.goto('http://localhost:4173', { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(1800);
+await page.screenshot({ path: 'screenshots/top-hero.png' });
+await page.evaluate(() => window.scrollTo(0, 900)); await page.waitForTimeout(600);
+await page.screenshot({ path: 'screenshots/mid-trust.png' });
+await page.locator('#story').scrollIntoViewIfNeeded(); await page.waitForTimeout(600);
+await page.screenshot({ path: 'screenshots/story-view.png' });
+await page.locator('#best-sellers').scrollIntoViewIfNeeded(); await page.waitForTimeout(600);
+await page.screenshot({ path: 'screenshots/best-view.png' });
+await page.locator('#shop').scrollIntoViewIfNeeded(); await page.waitForTimeout(600);
+await page.screenshot({ path: 'screenshots/shop-view.png' });
+await page.locator('footer').scrollIntoViewIfNeeded(); await page.waitForTimeout(600);
+await page.screenshot({ path: 'screenshots/footer-view.png' });
+await browser.close();

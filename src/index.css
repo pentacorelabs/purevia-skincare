@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+
+  --color-ivory: #fbf8f2;
+  --color-cream: #f3ede1;
+  --color-sand: #e7ddca;
+  --color-sage: #c7d0b9;
+  --color-sage-soft: #dee4d4;
+  --color-olive: #5f6847;
+  --color-olive-deep: #485039;
+  --color-forest: #222a1c;
+  --color-ink: #242a20;
+  --color-muted: #676c5d;
+  --color-clay: #a4563d;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal;
+  }
+
+  ::selection {
+    background: var(--color-sage);
+    color: var(--color-forest);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-olive);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.26em] text-olive;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-3 bg-forest px-7 py-4 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-ivory transition-colors duration-300 hover:bg-olive;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-3 border border-forest/25 bg-transparent px-7 py-4 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-forest transition-colors duration-300 hover:border-forest hover:bg-forest hover:text-ivory;
+  }
+
+  .btn-light {
+    @apply inline-flex items-center justify-center gap-3 bg-ivory px-7 py-4 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-forest transition-colors duration-300 hover:bg-sage;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-forest transition-colors hover:text-olive;
+  }
+
+  .field {
+    @apply w-full border border-forest/20 bg-ivory px-4 py-3.5 text-[13px] text-ink placeholder:text-muted/70 transition-colors focus:border-olive focus:outline-none;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.9s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+}
+
+.animate-toast {
+  animation: toastIn 0.35s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+}
+
+.animate-spin-slow {
+  animation: softSpin 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
